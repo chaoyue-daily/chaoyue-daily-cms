@@ -1,0 +1,10 @@
+{
+    "type": "mysql",
+    "host": "xxxxxxxx",
+    "port": 3306,
+    "username": "dev",
+    "password": "xxxxxxxx",
+    "database": "xxxxxxxx",
+    "entities": ["src/**/**.model{.ts,.js}"],
+    "synchronize": true
+  }

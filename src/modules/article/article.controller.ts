@@ -7,9 +7,19 @@ import { Article } from '../../models/article.model';
 export class ArticleController {
     constructor(private readonly articleService: ArticleService) {}
 
-    @Get()
-    async findLatest():Promise<Article[]>{
-        return this.articleService.findLatest();
+    @Get('/news')
+    async findNews():Promise<Article[]>{
+        return this.articleService.findNews();
+    }
+
+    @Get('/activities')
+    async findActivities():Promise<Article[]>{
+        return this.articleService.findActivities();
+    }
+
+    @Get('/contributes')
+    async findContributes():Promise<Article[]>{
+        return this.articleService.findContributes();
     }
 
     @Get('/:id')

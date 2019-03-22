@@ -11,6 +11,9 @@ export class SloganService {
     root(): string {
         return 'Hello World!';
     }
+    async findAll(): Promise<Slogan[]> {
+        return await this.sloganRepository.find();
+    }
     async findOne(id: number): Promise<Slogan> {
         return await this.sloganRepository.findOne({ id: id });
     }

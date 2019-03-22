@@ -8,8 +8,8 @@ export class SloganController {
     constructor(private readonly sloganService:SloganService) {}
 
     @Get()
-    root():string{
-        return this.sloganService.root();
+    async findAll():Promise<Slogan[]>{
+        return this.sloganService.findAll();
     }
 
     @Get('/:id')

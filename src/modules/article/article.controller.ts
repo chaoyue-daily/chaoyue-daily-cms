@@ -1,4 +1,4 @@
-import { Get, Controller,Param } from '@nestjs/common';
+import { Get, Post, Put, Delete, Controller, Param, Body } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { Article } from '../../models/article.model';
 
@@ -23,9 +23,22 @@ export class ArticleController {
     }
 
     @Get('/:id')
-    async findOne(@Param() params):Promise<Article>{
-        console.log(params.id);
-        return this.articleService.findOne(params.id);
+    async findOne(@Param('id') id: number):Promise<Article>{
+        return this.articleService.findOne(id);
+    }
+
+    @Post('')
+    async createOne(@Body() article: Article):Promise<Article>{
+        return this.articleService.createOne(article);
     }
     
+    @Put('/:id')
+    async modifyOne(@Param('id') id: number,@Body() article: Article):Promise<Article>{
+        return this.articleService.modifyOne(id,article);
+    }
+
+    @Delete('/:id')
+    async deleteOne(@Param('id') id: number):Promise<Article>{
+        return this.articleService.deleteOne(id);
+    }
 }

@@ -21,14 +21,21 @@
   "dependencies": {
     "@nestjs/common": "6.0.1",
     "@nestjs/core": "6.0.1",
+    "@nestjs/graphql": "^6.0.2",
     "@nestjs/microservices": "6.0.1",
     "@nestjs/platform-express": "6.0.1",
+    "@nestjs/swagger": "^3.0.2",
     "@nestjs/typeorm": "^6.0.0",
     "@nestjs/websockets": "6.0.1",
+    "apollo-server-express": "^2.4.8",
+    "graphql": "^14.1.1",
+    "moment": "^2.24.0",
     "mysql": "^2.16.0",
     "reflect-metadata": "0.1.13",
     "rimraf": "2.6.3",
     "rxjs": "6.4.0",
+    "swagger-ui-express": "^4.0.2",
+    "type-graphql": "^0.17.0",
     "typeorm": "^0.2.15"
   },
   "devDependencies": {

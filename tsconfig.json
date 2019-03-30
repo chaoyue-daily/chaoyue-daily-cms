@@ -6,13 +6,17 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es6",
+    "skipLibCheck": true,
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
       "@app": ["./"],
       "@app/*": ["./*"]
-    }
+    },
+    "lib": [
+      "esnext"
+    ]
   },
   "exclude": ["node_modules"]
 }

@@ -17,7 +17,8 @@ export class ArticleService {
 
     async findNews(): Promise<Article[]> {
         return await this.articleRepository.find({ select: ["id", "title", "image_url","type","date"] ,
-        where:{date: Raw(alias =>`datediff(now(),${alias}) < 8`),type: LessThanOrEqual(1004)  }});
+        where: {date: Raw(alias =>`datediff(now(),${alias}) < 8`),type: LessThanOrEqual(1004)},
+        order: {date: "DESC",type: "ASC"}});
     }
 
     async findActivities(): Promise<Article[]> {

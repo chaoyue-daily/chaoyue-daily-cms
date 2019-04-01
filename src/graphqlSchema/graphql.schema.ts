@@ -27,7 +27,7 @@ export abstract class IMutation {
 }
 
 export abstract class IQuery {
-    abstract getArticles(type?: string[]): Article[] | Promise<Article[]>;
+    abstract getArticles(types?: number[]): Article[] | Promise<Article[]>;
 
     abstract article(id: string): Article | Promise<Article>;
 

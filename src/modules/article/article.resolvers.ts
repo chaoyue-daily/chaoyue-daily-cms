@@ -1,5 +1,6 @@
-import { ParseIntPipe, UseGuards } from '@nestjs/common';
+import { ParseIntPipe, ValidationPipe, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
+import { Int } from 'type-graphql';
 // import { PubSub } from 'graphql-subscriptions';
 import { Article } from '../../graphqlSchema/graphql.schema';
 import { ArticleService } from './article.service';
@@ -10,9 +11,10 @@ import { ArticleService } from './article.service';
 export class ArticlesResolvers {
   constructor(private readonly articleService: ArticleService) {}
 
-  @Query('article')
+  @Query('getArticles')
   async getArticles(
-    types: string[],
+    @Args({ name: 'types', type: () => [Int] }) 
+    types: number[],
   ): Promise<Article[]> {
     return await this.articleService.findAll(types);
   }

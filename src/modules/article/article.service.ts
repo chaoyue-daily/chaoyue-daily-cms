@@ -9,10 +9,8 @@ export class ArticleService {
     constructor(@InjectRepository(Article)
     private readonly articleRepository: Repository<Article>) { }
 
-    async findAll(types: string[]): Promise<Article[]> {
-        let intTypes = types.map(x=>{return parseInt(x)});
-        
-        return await this.articleRepository.find({where: { type: In(intTypes) }});
+    async findAll(types: number[]): Promise<Article[]> {
+        return await this.articleRepository.find({where: { type: In(types) },order: {date: "DESC",type: "ASC"}});
     }
 
     async findNews(): Promise<Article[]> {

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Article } from '../../models/article.model';
-import { ArticlePagination } from '../../graphqlSchema/graphql.schema';
+import { CreateArticleInput, ArticlePagination } from '../../graphqlSchema/graphql.schema';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository,Raw,LessThanOrEqual,In } from 'typeorm';
 
@@ -28,6 +28,10 @@ export class ArticleService {
 
     async findAll(types: number[]): Promise<Article[]> {
         return await this.articleRepository.find({where: { type: In(types) },order: {date: "DESC",type: "ASC"}});
+    }
+
+    async create(article: CreateArticleInput): Promise<Article> {
+        return await this.articleRepository.save(article);
     }
 
     async findNews(): Promise<Article[]> {

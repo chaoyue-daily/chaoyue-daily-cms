@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Article } from '../../models/article.model';
+import { ArticlePagination } from '../../graphqlSchema/graphql.schema';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository,Raw,LessThanOrEqual,In } from 'typeorm';
 
@@ -8,6 +9,22 @@ export class ArticleService {
 
     constructor(@InjectRepository(Article)
     private readonly articleRepository: Repository<Article>) { }
+
+    async findByPage(page_no: number,page_items: number) : Promise<ArticlePagination>{
+        return await this.articleRepository.find({ select: ["id", "title","date"] ,
+        where: {type: LessThanOrEqual(1004)}}).then((x)=>{ 
+            let obj = new ArticlePagination();
+           
+            obj.total_items = x.length;
+            obj.pages = Math.round(x.length/page_items);
+            obj.page_no = page_no;
+            obj.page_items = page_items;
+            let startIndex = page_no == 1 ? 0 : (page_no-1) * page_items;
+            obj.rows = x.splice(startIndex,page_items);
+
+            return obj;
+        });
+    }
 
     async findAll(types: number[]): Promise<Article[]> {
         return await this.articleRepository.find({where: { type: In(types) },order: {date: "DESC",type: "ASC"}});

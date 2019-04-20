@@ -1,4 +1,5 @@
 type Query {
+  getArticlesByPage(page_no: Int!, page_items: Int!): ArticlePagination
   getArticles(types: [Int]): [Article]
   article(id: ID!): Article
 }
@@ -9,6 +10,14 @@ type Mutation {
 
 type Subscription {
   articleCreated: Article
+}
+
+type ArticlePagination {
+  total_items: Int!
+  pages: Int!
+  page_no: Int!
+  page_items: Int!
+  rows: [Article]
 }
 
 type Article {

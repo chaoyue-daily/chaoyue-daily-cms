@@ -22,11 +22,21 @@ export class Article {
     type?: number;
 }
 
+export class ArticlePagination {
+    total_items: number;
+    pages: number;
+    page_no: number;
+    page_items: number;
+    rows?: Article[];
+}
+
 export abstract class IMutation {
     abstract createArticle(createArticleInput?: CreateArticleInput): Article | Promise<Article>;
 }
 
 export abstract class IQuery {
+    abstract getArticlesByPage(page_no: number, page_items: number): ArticlePagination | Promise<ArticlePagination>;
+
     abstract getArticles(types?: number[]): Article[] | Promise<Article[]>;
 
     abstract article(id: string): Article | Promise<Article>;
